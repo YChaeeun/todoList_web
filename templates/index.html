@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todoList</title>
+
+    {# BootstrapCDN #}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+    <div class="container" style="margin-top:100px">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="card">
+                    <form action="#" method="post">
+                        <div class="card-header">
+                            {# 날짜 #} {# 정렬 버튼 #}
+                            <div class="float-left" style="padding: bottom 15px;padding-top: 5px">
+                                토요일, 3월 3일
+                            </div>
+                            <div class="float-right">
+                                    <button type="button" class="btn btn-outline-success">정렬</button>
+                            </div>
+                            {# 한 번 누르면 날짜 최신순, 다시 누르면 우선순위 중요도 순#}
+                            
+                            {# 할 일 작성하기 나중에 ajax로 바꾸기..!!#}
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"
+                                        name="todoItem" id="todoItem" placeholder="+ 할 일을 입력해주세요" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">완료</button>
+                                </div>
+                            </div>
+        
+                        </div>
+                        <div class="card-body" style="padding-top:0px;padding-bottom:0px" >
+                            <table class="table" style="margin-top:0px;margin-bottom:10px">
+                                {% for _ in range(7)%}
+                                <tbody>
+                                    <tr>
+                                        <td style="width:10%;padding-right:5px">★★</td>
+                                        <td style="padding-left:5px">해야 할 일</td>
+                                        <td style="width:10%">O</td>
+                                        <td style="width:10%">X</td>
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+
+
+                            </table>
+                            <div class="float-left" style="padding-bottom: 15px;">
+                                <button type="button" class="btn btn-primary" style="border-radius: 60%" >
+                                    <label for="todoItem" style="margin-bottom:0px">입력</label>
+                                </button> 
+                            </div>
+                            
+                            <div class="float-right" style="padding-bottom: 15px;">
+                                <button type="button" class="btn btn-primary" style="border-radius: 60%" >
+                                    이전/다음
+                                </button> 
+                            </div>
+
+                        </div>
+                        
+                        
+                    </form>    
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+
+</body>
+</html>
