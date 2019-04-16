@@ -22,7 +22,24 @@
                             {# 날짜 #} {# 정렬 버튼 #}
                             <div class="float-left" style="padding: 5px 0px 10px 3px">
                                 {# 토요일, 3월 3일 #}
-                                {{data_list.now}}
+                                {% if now.weekday() == 0 %}
+                                월요일,
+                                {% elif now.weekday() == 1 %}
+                                화요일,
+                                {% elif now.weekday() == 1 %}
+                                수요일,
+                                {% elif now.weekday() == 1 %}
+                                목요일,
+                                {% elif now.weekday() == 1 %}
+                                금요일,
+                                {% elif now.weekday() == 1 %}
+                                토요일,
+                                {% elif now.weekday() == 1 %}
+                                일요일,
+                                {% endif %}
+
+
+                                {{now.month}}월 {{now.day}}일
                             </div>
                             
                             <div class="float-right">
