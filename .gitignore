@@ -1,3 +1,5 @@
 database/_pycache_
 *.pyc
 **/_pycache_
+_pycach_/
+*[.pyc]
