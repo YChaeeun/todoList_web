@@ -18,6 +18,20 @@ def index():
     html = render_template('index.html', data_list=content_list)
     return html
 
+@app.route('/write_pro', methods=['post'])
+def write_pro() :
+
+    element = request.values.get('todoItem')
+
+    todo_list_dao.write_todo(element)
+
+    return '''
+            <script>
+                alert("저장되었습니다")
+                location.href="."
+            </script>
+           ''' 
+
 if __name__ == '__main__' :
     app.run(debug=True)
 
