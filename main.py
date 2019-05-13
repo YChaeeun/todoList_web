@@ -32,6 +32,18 @@ def write_pro() :
             </script>
            ''' 
 
+@app.route('/delete', methods=['post'])
+def delete() :
+    
+    idx = request.values.get('idx')
+    todo_list_dao.delete(idx)
+    return '''
+            <script>
+                alert("삭제되었습니다")
+                location.href="."
+            </script>
+           ''' 
+
 if __name__ == '__main__' :
     app.run(debug=True)
 

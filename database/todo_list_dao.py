@@ -9,7 +9,7 @@ def get_todolist():
     # start_idx = (int(page)-1)*10 
 
     sql = '''
-        select todo_content, todo_importance
+        select todo_content, todo_importance, todo_idx
         from todo
         where todo_status = 1
         order by todo_idx desc
@@ -26,7 +26,8 @@ def get_todolist():
     for obj in row :
         data_dic = {
             'todo_content' : obj[0],
-            'todo_importance' : obj[1]
+            'todo_importance' : obj[1],
+            'todo_idx' : obj[2]
         }
         data_list.append(data_dic)
     
@@ -51,6 +52,23 @@ def write_todo(element):
 
     conn.commit()
     conn.close()
+
+def delete(itemIdx) :
+
+    conn = connection.get_connection()
+
+    sql = '''
+        update todo
+        set todo_status = 0
+        where todo_status = 1 and todo_idx=%s
+    '''
+
+    cursor = conn.cursor()
+    cursor.execute(sql, itemIdx)
+
+    conn.commit()
+    conn.close()
+
 
 
 # 할일 삭제 (상태값 변경)
