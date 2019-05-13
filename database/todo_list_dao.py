@@ -53,6 +53,7 @@ def write_todo(element):
     conn.commit()
     conn.close()
 
+# 할일 삭제 (상태값 변경)
 def delete(itemIdx) :
 
     conn = connection.get_connection()
@@ -71,6 +72,6 @@ def delete(itemIdx) :
 
 
 
-# 할일 삭제 (상태값 변경)
+
 
 # 할일 수정
