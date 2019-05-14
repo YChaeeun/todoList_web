@@ -44,6 +44,33 @@ def delete() :
             </script>
            ''' 
 
+@app.route('/modify', defaults={'idx':1})
+@app.route('/modify/<idx>')
+def modify(idx) :
+    content_list = todo_list_dao.get_todolist()
+    modify_content = todo_list_dao.get_modify_content(idx)
+    modify_dic = {
+        'modify_idx' : idx,
+        'modify_content' : modify_content
+    }
+    html = render_template('modify.html', data_list=content_list, data_dic=modify_dic)
+    return html
+
+
+@app.route('/modify_pro', methods=['post'])
+def modify_pro() :
+    
+    content = request.values.get('modifyItem')
+    idx = request.values.get('modifyIdx')
+    todo_list_dao.modify(content,idx)
+
+    return '''
+            <script>
+                alert("수정되었습니다")
+                location.href="."
+            </script>
+           ''' 
+
 if __name__ == '__main__' :
     app.run(debug=True)
 

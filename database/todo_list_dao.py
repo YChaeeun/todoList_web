@@ -11,7 +11,7 @@ def get_todolist():
     sql = '''
         select todo_content, todo_importance, todo_idx
         from todo
-        where todo_status = 1
+        where todo_status = 1 or todo_status = 2
         order by todo_idx desc
     ''' 
 
@@ -34,6 +34,7 @@ def get_todolist():
     conn.close
 
     return data_list
+
 
 
 # 할일 작성하기
@@ -61,7 +62,7 @@ def delete(itemIdx) :
     sql = '''
         update todo
         set todo_status = 0
-        where todo_status = 1 and todo_idx=%s
+        where todo_idx=%s
     '''
 
     cursor = conn.cursor()
@@ -71,7 +72,39 @@ def delete(itemIdx) :
     conn.close()
 
 
+# 수정할 content 가져오기
+def get_modify_content(idx) :
+    conn = connection.get_connection()
 
+    sql = '''
+        select todo_content
+        from todo
+        where todo_idx = %s
+    '''
 
+    cursor = conn.cursor()
+    cursor.execute(sql, idx)
 
-# 할일 수정
+    item = cursor.fetchone()
+    item = item[0]
+    
+    conn.close()
+
+    return item
+
+# 할일 수정 처리
+def modify(item, itemIdx) :
+    conn = connection.get_connection()
+
+    sql = '''
+        update todo
+        set todo_status = 2,
+            todo_content = %s
+        where todo_idx= %s
+    '''
+
+    cursor = conn.cursor()
+    cursor.execute(sql, (item, itemIdx))
+
+    conn.commit()
+    conn.close()

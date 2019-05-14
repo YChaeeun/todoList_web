@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>todoList</title>
+    <title>todoList_modify</title>
 
     {# BootstrapCDN #}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -17,7 +17,7 @@
             <div class="col-2"></div>
             <div class="col-8">
                 <div class="card">
-                    <form action="{{url_for('write_pro')}}" method="post">
+                    <form action="{{url_for('modify_pro')}}" method="post">
                         <div class="card-header" style="padding-bottom: 2px;">
                             {# 날짜 #} {# 정렬 버튼 #}
                             <div class="float-left" style="padding: 5px 0px 10px 3px">
@@ -47,59 +47,39 @@
                             </div>
                         
                             {# 한 번 누르면 날짜 최신순, 다시 누르면 우선순위 중요도 순#}
-                            
-                            {# 할 일 작성하기 나중에 ajax로 바꾸기..!!#}
+                            <input type="hidden" name = "modifyIdx" value = "{{data_dic.modify_idx}}">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control"
-                                        name="todoItem" id="todoItem" placeholder="+ 할 일을 입력해주세요" />
+                                        name="modifyItem" id="modifyItem" value="{{data_dic.modify_content}}" />
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">완료</button>
+                                    <button class="btn btn-primary" type="submit">수정</button>
                                 </div>
                             </div>
                     </form>  
                         </div>
                         <div class="card-body" style="padding-top:0px;padding-bottom:0px" >
                             <table class="table" style="margin-top:0px;margin-bottom:10px">
-                                {% for obj in data_list%}
                                 <tbody>
+                                    
+                                {% for obj in data_list  %}
+                                    {% if obj.todo_idx == data_dic.modify_idx | int %}
                                     <tr>
                                         <td style="width:10%;padding-right:5px">{{obj.todo_importance}}</td>
-                                        <td style="padding-left:5px">{{obj.todo_content}}</td>
-                                        
-                                        
-                                        <td style="width:10%" class="btn btn-link">
-                                            <a href="/modify/{{obj.todo_idx}}">O</a>
-                                        </td>
-
-
-                                        <form action="{{url_for('delete')}}" method="post">
-                                            <td style="width:10%">
-                                                <input type="hidden" class="form-control" name="idx" value="{{obj.todo_idx}}">
-                                                <button class= "btn btn-link" type="submit">X</button>  
-                                            </td> {# 삭제 #}
-                                        </form>
+                                        <td style="padding-left:5px;font-weight:bold">{{obj.todo_content}}</td>
                                     </tr>
-                                </tbody>
+                                
+                                    {% else %}
+                                    <tr style="opacity:0.4">      
+                                        <td style="width:10%;padding-right:5px">{{obj.todo_importance}}</td>
+                                        <td style="padding-left:5px">{{obj.todo_content}}</td>
+                                    </tr>
+                                    {% endif %}
                                 {% endfor %}
-
-
+                                </tbody>
                             </table>
-                            <div class="float-left" style="padding-bottom: 15px;">
-                                <button type="button" class="btn btn-primary" style="border-radius: 60%" >
-                                    <label for="todoItem" style="margin-bottom:0px">complete</label>
-                                </button> 
-                            </div>
-                            
-                            <div class="float-right" style="padding-bottom: 15px;">
-                                <button type="button" class="btn btn-primary" style="border-radius: 60%" >
-                                    이전/다음
-                                </button> 
-                            </div>
 
                         </div>
-                        
-                        
-                        
+ 
                 </div>
             </div>
             <div class="col-2"></div>
