@@ -12,7 +12,8 @@
 
 </head>
 <body>
-    <div class="container" style="margin-top:100px">
+    {% include '/include/topmenu.html' %}
+    <div class="container" style="margin-top:70em">
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
@@ -21,22 +22,21 @@
                         <div class="card-header" style="padding-bottom: 2px;">
                             {# 날짜 #} {# 정렬 버튼 #}
                             <div class="float-left" style="padding: 5px 0px 10px 3px">
-                                {# 토요일, 3월 3일 #}
-                                {% if now.weekday() == 0 %}
-                                월요일,
-                                {% elif now.weekday() == 1 %}
-                                화요일,
-                                {% elif now.weekday() == 1 %}
-                                수요일,
-                                {% elif now.weekday() == 1 %}
-                                목요일,
-                                {% elif now.weekday() == 1 %}
-                                금요일,
-                                {% elif now.weekday() == 1 %}
-                                토요일,
-                                {% elif now.weekday() == 1 %}
-                                일요일,
-                                {% endif %}
+                                    {% if now.weekday() == 0 %}
+                                    월요일,
+                                    {% elif now.weekday() == 1 %}
+                                    화요일,
+                                    {% elif now.weekday() == 2 %}
+                                    수요일,
+                                    {% elif now.weekday() == 3 %}
+                                    목요일,
+                                    {% elif now.weekday() == 4 %}
+                                    금요일,
+                                    {% elif now.weekday() == 5 %}
+                                    토요일,
+                                    {% elif now.weekday() == 6 %}
+                                    일요일,
+                                    {% endif %}
 
 
                                 {{now.month}}월 {{now.day}}일
